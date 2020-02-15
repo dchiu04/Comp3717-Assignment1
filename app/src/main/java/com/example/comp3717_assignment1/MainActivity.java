@@ -46,55 +46,57 @@ public class MainActivity extends AppCompatActivity {
                     + "&from=2020-02-14&sortBy=publishedAt&apiKey=7706477163614421b4c5d5b6b9dcf354";
 
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
+            ArticleArray.loadNewArticles(userQuery, requestQueue);
 
-            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, req, new JSONObject(), (res) -> {
-                System.out.println(res);
-                JSONArray articles_JSON = new JSONArray();
-                try {
-                    articles_JSON = res.getJSONArray("articles");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-                System.out.println(articles); // gets all articles.
-                try {
-
-                    for (int i = 0; i < 10; i++) {
-                        String source = articles_JSON.getJSONObject(i).getJSONObject("source").getString("name"); // gets sources
-                        String author = articles_JSON.getJSONObject(i).getString("author"); // gets authors
-                        String title = articles_JSON.getJSONObject(i).getString("title"); // gets title
-                        String description = articles_JSON.getJSONObject(i).getString("description");
-                        String url = articles_JSON.getJSONObject(i).getString("url");
-                        String urlToImage = articles_JSON.getJSONObject(i).getString("urlToImage");
-                        String publishedAt = articles_JSON.getJSONObject(i).getString("publishedAt");
-                        String content = articles_JSON.getJSONObject(i).getString("content");
-                        Articles art = new Articles(source, author, title, description, url, urlToImage, publishedAt,
-                                content);
-                        articles.add(art);
-                    }
-
-                    System.out.println(articles.size());
-                    for (int i = 0; i < articles.size(); i++) {
-                        System.out.println(articles.get(i).getSource());
-                        System.out.println(articles.get(i).getAuthor());
-                        System.out.println(articles.get(i).getContent());
-                        System.out.println(articles.get(i).getDescription());
-                        System.out.println(articles.get(i).getPublishedAt());
-                        System.out.println(articles.get(i).getUrl());
-                        System.out.println(articles.get(i).getUrlToImage());
-                        System.out.println(i);
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-                requestQueue.stop();
-            }, (error) -> {
-               // textView.setText("Something went wrong...");
-                error.printStackTrace();
-                requestQueue.stop();
-            });
-            requestQueue.add(request);
+//
+//            JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, req, new JSONObject(), (res) -> {
+//                System.out.println(res);
+//                JSONArray articles_JSON = new JSONArray();
+//                try {
+//                    articles_JSON = res.getJSONArray("articles");
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//
+//                System.out.println(articles); // gets all articles.
+//                try {
+//
+//                    for (int i = 0; i < 10; i++) {
+//                        String source = articles_JSON.getJSONObject(i).getJSONObject("source").getString("name"); // gets sources
+//                        String author = articles_JSON.getJSONObject(i).getString("author"); // gets authors
+//                        String title = articles_JSON.getJSONObject(i).getString("title"); // gets title
+//                        String description = articles_JSON.getJSONObject(i).getString("description");
+//                        String url = articles_JSON.getJSONObject(i).getString("url");
+//                        String urlToImage = articles_JSON.getJSONObject(i).getString("urlToImage");
+//                        String publishedAt = articles_JSON.getJSONObject(i).getString("publishedAt");
+//                        String content = articles_JSON.getJSONObject(i).getString("content");
+//                        Articles art = new Articles(source, author, title, description, url, urlToImage, publishedAt,
+//                                content);
+//                        articles.add(art);
+//                    }
+//
+//                    System.out.println(articles.size());
+//                    for (int i = 0; i < articles.size(); i++) {
+////                        System.out.println(articles.get(i).getSource());
+////                        System.out.println(articles.get(i).getAuthor());
+////                        System.out.println(articles.get(i).getContent());
+////                        System.out.println(articles.get(i).getDescription());
+////                        System.out.println(articles.get(i).getPublishedAt());
+////                        System.out.println(articles.get(i).getUrl());
+////                        System.out.println(articles.get(i).getUrlToImage());
+////                        System.out.println(i);
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//                requestQueue.stop();
+//            }, (error) -> {
+//               // textView.setText("Something went wrong...");
+//                error.printStackTrace();
+//                requestQueue.stop();
+//            });
+//            requestQueue.add(request);
             startActivity(intent);
         });
     }

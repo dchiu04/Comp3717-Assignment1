@@ -23,7 +23,6 @@ public class Articles {
         content = cont;
     }
 
-
     public String getSource() {
         return source;
     }
