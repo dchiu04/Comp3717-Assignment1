@@ -2,6 +2,9 @@ package com.example.comp3717_assignment1;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import android.widget.ListView;
@@ -35,24 +38,24 @@ public class ListViewActivity extends AppCompatActivity {
         intent = getIntent();
         arr = new ArrayList();
         RequestQueue requestQueue = Volley.newRequestQueue(ListViewActivity.this);
-
-        //Not needed?
-        //adapter = new ArrayAdapter<String>(this, R.layout.activity_list_view, arr);
-
-        keyword = intent.getStringExtra("keyword");
-        System.out.println("This is the keyword: " + keyword);
         listView = findViewById(R.id.list);
-        loadNewArticles(keyword, requestQueue, ListViewActivity.this);
+        loadNewArticles(keyword, requestQueue, this);
     }
 
-    public static void printAllArticles() {
-        //Display all lists here!
+    public static void printAllArticles(Context cv) {
         for (int i = 0; i < ArticleArray.articles.size(); i++) {
             arr.add(ArticleArray.articles.get(i).title());
-            System.out.println("String arraylist holds: " + arr.get(i));
-
         }
+        adapter = new ArrayAdapter<>(cv, android.R.layout.simple_list_item_1, arr);
         listView.setAdapter(adapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent detailActivityIntent = new Intent(cv, DetailsActivity.class);
+                detailActivityIntent.putExtra("index", position);
+                cv.startActivity(detailActivityIntent);
+            }
+        });
     }
 
     public static void loadNewArticles(String userQuery, RequestQueue requestQueue, Context cv) {
@@ -60,32 +63,11 @@ public class ListViewActivity extends AppCompatActivity {
         String url_req = "https://newsapi.org/v2/everything?q=" + userQuery
                 + "&from=2020-02-14&sortBy=publishedAt&apiKey=" + API_KEY;
 
-        ArticleArray.articles.clear();
-
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url_req, new JSONObject(), (res) -> {
             JSONArray jsonArr = new JSONArray();
             try {
                 jsonArr = res.getJSONArray("articles");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            try {
-                for (int i = 0; i < 10; i++) {
-                    String source = jsonArr.getJSONObject(i).getJSONObject("source").getString("name"); // gets sources
-                    String author = jsonArr.getJSONObject(i).getString("author"); // gets authors
-                    String title = jsonArr.getJSONObject(i).getString("title"); // gets title
-                    String description = jsonArr.getJSONObject(i).getString("description");
-                    String url = jsonArr.getJSONObject(i).getString("url");
-                    String urlToImage = jsonArr.getJSONObject(i).getString("urlToImage");
-                    String publishedAt = jsonArr.getJSONObject(i).getString("publishedAt");
-                    String content = jsonArr.getJSONObject(i).getString("content");
-                    Articles art = new Articles(source, author, title, description, url, urlToImage, publishedAt,
-                            content);
-                    ArticleArray.articles.add(art);
-                    printAllArticles();
-                }
-
+                printAllArticles(cv);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -97,5 +79,3 @@ public class ListViewActivity extends AppCompatActivity {
         requestQueue.add(request);
     }
 }
-
-

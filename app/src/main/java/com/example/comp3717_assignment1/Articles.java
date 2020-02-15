@@ -10,7 +10,6 @@ public class Articles {
     private String publishedAt;
     private String content;
 
-
     public Articles(String src, String auth, String titl, String desc, String link,
                    String imgUrl, String date, String cont) {
         source = src;
