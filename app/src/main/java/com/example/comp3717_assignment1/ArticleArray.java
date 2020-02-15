@@ -31,7 +31,7 @@ public class ArticleArray{
                 e.printStackTrace();
             }
             try {
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 20; i++) {
                     System.out.println(jsonArr.getJSONObject(i));
                     String source = jsonArr.getJSONObject(i).getJSONObject("source").getString("name"); // gets sources
                     String author = jsonArr.getJSONObject(i).getString("author"); // gets authors
