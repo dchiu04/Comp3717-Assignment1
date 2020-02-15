@@ -7,8 +7,10 @@
     tools:context=".ListViewActivity"
     android:orientation="horizontal">
 
-    <ListView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:id="@+id/list"/>
+        <ListView
+            android:id="@+id/list"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            />
+
 </LinearLayout>

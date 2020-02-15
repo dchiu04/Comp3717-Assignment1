@@ -1,13 +1,8 @@
 package com.example.comp3717_assignment1;
 
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.TextView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,44 +17,35 @@ public class ArticleArray{
     //Volley.newRequestQueue(MainActivity.this)
     public static void loadNewArticles(String userQuery, RequestQueue requestQueue) {
 
-        String req = "https://newsapi.org/v2/everything?q=" + userQuery + "&https://learn.bcit.ca/d2l/home/610176"
-                + "from=2020-01-14&sortBy=publishedAt&apiKey=5805e26415354f06a8b346006b2a2226";
+        String url_req = "https://newsapi.org/v2/everything?q=" + userQuery +
+                 "&from=2020-02-14&sortBy=publishedAt&apiKey=7706477163614421b4c5d5b6b9dcf354";
 
         articles.clear();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, req, new JSONObject(), (res) -> {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url_req, new JSONObject(), (res) -> {
             System.out.println(res);
-            JSONArray ourShit = new JSONArray();
+            JSONArray jsonArr = new JSONArray();
             try {
-                ourShit = res.getJSONArray("articles");
+                jsonArr = res.getJSONArray("articles");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
-            System.out.println(ourShit); // gets all articles.
+            System.out.println(jsonArr); // gets all articles.
             try {
 
                 for (int i = 0; i < 10; i++) {
-                    String source = ourShit.getJSONObject(i).getJSONObject("source").getString("name"); // gets sources
-//                    System.out.println(source);
-                    String author = ourShit.getJSONObject(i).getString("author"); // gets authors
-//                    System.out.println(author);
-                    String title = ourShit.getJSONObject(i).getString("title"); // gets title
-//                    System.out.println(title);
-                    String description = ourShit.getJSONObject(i).getString("description");
-//                    System.out.println(description);
-                    String url = ourShit.getJSONObject(i).getString("url");
-//                    System.out.println(url);
-                    String urlToImage = ourShit.getJSONObject(i).getString("urlToImage");
-//                    System.out.println(urlToImage);
-                    String publishedAt = ourShit.getJSONObject(i).getString("publishedAt");
-//                    System.out.println(publishedAt);
-                    String content = ourShit.getJSONObject(i).getString("content");
-//                    System.out.println(content);
+                    String source = jsonArr.getJSONObject(i).getJSONObject("source").getString("name"); // gets sources
+                    String author = jsonArr.getJSONObject(i).getString("author"); // gets authors
+                    String title = jsonArr.getJSONObject(i).getString("title"); // gets title
+                    String description = jsonArr.getJSONObject(i).getString("description");
+                    String url = jsonArr.getJSONObject(i).getString("url");
+                    String urlToImage = jsonArr.getJSONObject(i).getString("urlToImage");
+                    String publishedAt = jsonArr.getJSONObject(i).getString("publishedAt");
+                    String content = jsonArr.getJSONObject(i).getString("content");
                     Articles art = new Articles(source, author, title, description, url, urlToImage, publishedAt,
                             content);
                     articles.add(art);
-                    System.out.println("added article #" + (i + 1));
                 }
 
             } catch (JSONException e) {

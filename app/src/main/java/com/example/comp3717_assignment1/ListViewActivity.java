@@ -1,11 +1,10 @@
 package com.example.comp3717_assignment1;
-import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.ArrayAdapter;
 
+import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
@@ -17,59 +16,70 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 public class ListViewActivity extends AppCompatActivity {
     private static final String API_KEY = "7706477163614421b4c5d5b6b9dcf354";
-    String keywords;
     String DATE = "yyy-MM-dd";
-    ListView listView;
+    static ListView listView;
     String keyword;
-    TextView textView;
+    static ArrayAdapter<String> adapter;
+    static ArrayList<String> arr;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_view);
-        Intent intent = new Intent();
+        intent = getIntent();
+        arr = new ArrayList();
         RequestQueue requestQueue = Volley.newRequestQueue(ListViewActivity.this);
+
+        //Not needed?
+        //adapter = new ArrayAdapter<String>(this, R.layout.activity_list_view, arr);
+
         keyword = intent.getStringExtra("keyword");
+        System.out.println("This is the keyword: " + keyword);
         listView = findViewById(R.id.list);
-        loadNewArticles(keyword, requestQueue);
+        loadNewArticles(keyword, requestQueue, ListViewActivity.this);
     }
 
     public static void printAllArticles() {
-        //listView.
-        for (int i = 0; i < ArticleArray.articles.size(); i++)
-            System.out.println(ArticleArray.articles.get(i).title());
+        //Display all lists here!
+        for (int i = 0; i < ArticleArray.articles.size(); i++) {
+            arr.add(ArticleArray.articles.get(i).title());
+            System.out.println("String arraylist holds: " + arr.get(i));
+
+        }
+        listView.setAdapter(adapter);
     }
 
-    public static void loadNewArticles(String userQuery, RequestQueue requestQueue) {
+    public static void loadNewArticles(String userQuery, RequestQueue requestQueue, Context cv) {
 
-        String req = "https://newsapi.org/v2/everything?q=" + userQuery
-                + "&from=2020-01-14&sortBy=publishedAt&apiKey=" + API_KEY;
+        String url_req = "https://newsapi.org/v2/everything?q=" + userQuery
+                + "&from=2020-02-14&sortBy=publishedAt&apiKey=" + API_KEY;
 
         ArticleArray.articles.clear();
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, req, new JSONObject(), (res) -> {
-            //System.out.println(res);
-            JSONArray ourShit = new JSONArray();
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url_req, new JSONObject(), (res) -> {
+            JSONArray jsonArr = new JSONArray();
             try {
-                ourShit = res.getJSONArray("articles");
+                jsonArr = res.getJSONArray("articles");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
 
             try {
-
                 for (int i = 0; i < 10; i++) {
-                    String source = ourShit.getJSONObject(i).getJSONObject("source").getString("name"); // gets sources
-                    String author = ourShit.getJSONObject(i).getString("author"); // gets authors
-                    String title = ourShit.getJSONObject(i).getString("title"); // gets title
-                    String description = ourShit.getJSONObject(i).getString("description");
-                    String url = ourShit.getJSONObject(i).getString("url");
-                    String urlToImage = ourShit.getJSONObject(i).getString("urlToImage");
-                    String publishedAt = ourShit.getJSONObject(i).getString("publishedAt");
-                    String content = ourShit.getJSONObject(i).getString("content");
+                    String source = jsonArr.getJSONObject(i).getJSONObject("source").getString("name"); // gets sources
+                    String author = jsonArr.getJSONObject(i).getString("author"); // gets authors
+                    String title = jsonArr.getJSONObject(i).getString("title"); // gets title
+                    String description = jsonArr.getJSONObject(i).getString("description");
+                    String url = jsonArr.getJSONObject(i).getString("url");
+                    String urlToImage = jsonArr.getJSONObject(i).getString("urlToImage");
+                    String publishedAt = jsonArr.getJSONObject(i).getString("publishedAt");
+                    String content = jsonArr.getJSONObject(i).getString("content");
                     Articles art = new Articles(source, author, title, description, url, urlToImage, publishedAt,
                             content);
                     ArticleArray.articles.add(art);

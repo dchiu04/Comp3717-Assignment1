@@ -36,10 +36,9 @@ public class MainActivity extends AppCompatActivity {
         title = findViewById(R.id.title);
 
         button.setOnClickListener((v) -> {
-            intent = new Intent(v.getContext(), ListViewActivity.class);
+            intent = new Intent(this, ListViewActivity.class);
             String text = input.getText().toString();
-            intent.putExtra("keyword",text);
-            startActivity(intent);
+            intent.putExtra("keyword", text);
 
             userQuery = text;
             req = "https://newsapi.org/v2/everything?q=" + userQuery
