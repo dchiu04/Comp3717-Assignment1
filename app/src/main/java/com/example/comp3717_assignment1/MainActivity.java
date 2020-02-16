@@ -1,24 +1,24 @@
 package com.example.comp3717_assignment1;
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
-    static final ArrayList<Articles> articles = new ArrayList<Articles>();
+    public static final String API = "7706477163614421b4c5d5b6b9dcf354";
     Button button;
     EditText input;
     TextView title;
-    String keyword;
-    String userQuery = "bitcoin";
-    Intent intent;
-    String req = "https://newsapi.org/v2/everything?q=" + userQuery
-            + "&from=2020-02-14&sortBy=publishedAt&apiKey=7706477163614421b4c5d5b6b9dcf354";
+    String userQuery;
+    public static Date c = Calendar.getInstance().getTime();
+    public static SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+    public static final String formattedDate = df.format(c);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,11 +31,8 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener((v) -> {
             String text = input.getText().toString();
             userQuery = text;
-            req = "https://newsapi.org/v2/everything?q=" + userQuery
-                    + "&from=2020-02-14&sortBy=publishedAt&apiKey=7706477163614421b4c5d5b6b9dcf354";
-
             RequestQueue requestQueue = Volley.newRequestQueue(MainActivity.this);
-            ArticleArray.loadNewArticles(userQuery, requestQueue, this);
+            ArticleArray.loadArticles(userQuery, requestQueue, this);
         });
     }
 }

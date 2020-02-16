@@ -1,14 +1,14 @@
 package com.example.comp3717_assignment1;
 
 public class Articles {
-    private String source;
-    private String author;
-    private String title;
-    private String description;
-    private String url;
-    private String urlToImage;
-    private String publishedAt;
-    private String content;
+    String source;
+    String author;
+    String title;
+    String description;
+    String url;
+    String urlToImage;
+    String publishedAt;
+    String content;
 
     public Articles(String src, String auth, String titl, String desc, String link,
                    String imgUrl, String date, String cont) {
@@ -30,7 +30,7 @@ public class Articles {
         return author;
     }
 
-    public String title() {
+    public String getTitle() {
         return title;
     }
 
@@ -53,6 +53,4 @@ public class Articles {
     public String getContent() {
         return content;
     }
-
-
 }

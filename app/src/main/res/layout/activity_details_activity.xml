@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailsActivity">
-
-    <!--    <ScrollView-->
-    <!--        android:layout_width="6dp"-->
-    <!--        android:layout_height="4dp">-->
-    <!--        &lt;!&ndash;        app:layout_constraintVertical_bias="1.0"&ndash;&gt;-->
-
 
     <ScrollView
         android:layout_width="match_parent"
@@ -33,7 +26,6 @@
                 android:id="@+id/article_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="12dp"
                 android:text="TextView"
                 android:textSize="15sp"
@@ -43,7 +35,6 @@
                 android:id="@+id/article_author"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="20dp"
                 android:text="TextView" />
 
@@ -51,7 +42,6 @@
                 android:id="@+id/article_publish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="20dp"
                 android:text="TextView" />
 
@@ -59,7 +49,6 @@
                 android:id="@+id/article_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="20dp"
                 android:gravity="left"
                 android:text="TextView"
@@ -68,16 +57,14 @@
             <TextView
                 android:id="@+id/article_content"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="87dp"
                 android:layout_marginTop="20dp"
-
                 android:text="TextView" />
 
             <TextView
                 android:id="@+id/article_source"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="20dp"
                 android:text="TextView" />
 
@@ -85,14 +72,9 @@
                 android:id="@+id/article_URL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="20dp"
-                android:text="TextView" />
-
+                android:text="TextView"/>
         </LinearLayout>
     </ScrollView>
-
-    <!--    </ScrollView>-->
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

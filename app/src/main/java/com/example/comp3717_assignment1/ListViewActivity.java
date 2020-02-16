@@ -2,7 +2,6 @@ package com.example.comp3717_assignment1;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,8 +18,6 @@ import java.util.ArrayList;
 
 
 public class ListViewActivity extends AppCompatActivity {
-    private static final String API_KEY = "7706477163614421b4c5d5b6b9dcf354";
-    String DATE = "yyy-MM-dd";
     static ListView listView;
     String keyword;
     static ArrayAdapter<String> adapter;
@@ -35,12 +32,12 @@ public class ListViewActivity extends AppCompatActivity {
         arr = new ArrayList();
         RequestQueue requestQueue = Volley.newRequestQueue(ListViewActivity.this);
         listView = findViewById(R.id.list);
-        loadNewArticles(keyword, requestQueue, this);
+        loadArticles(keyword, requestQueue, this);
     }
 
-    public static void printAllArticles(Context cv) {
+    public static void setAdapter(Context cv) {
         for (int i = 0; i < ArticleArray.articles.size(); i++) {
-            arr.add(ArticleArray.articles.get(i).title());
+            arr.add(ArticleArray.articles.get(i).getTitle());
         }
         adapter = new ArrayAdapter<>(cv, android.R.layout.simple_list_item_1, arr);
         listView.setAdapter(adapter);
@@ -54,16 +51,16 @@ public class ListViewActivity extends AppCompatActivity {
         });
     }
 
-    public static void loadNewArticles(String userQuery, RequestQueue requestQueue, Context cv) {
+    public static void loadArticles(String userQuery, RequestQueue requestQueue, Context cv) {
 
-        String url_req = "https://newsapi.org/v2/everything?q=" + userQuery
-                + "&from=2020-02-14&sortBy=publishedAt&apiKey=" + API_KEY;
+        String URL = "https://newsapi.org/v2/everything?q=" + userQuery
+                + "&from=" + MainActivity.formattedDate + "&sortBy=publishedAt&apiKey=" + MainActivity.API;
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url_req, new JSONObject(), (res) -> {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, new JSONObject(), (res) -> {
             JSONArray jsonArr = new JSONArray();
             try {
                 jsonArr = res.getJSONArray("articles");
-                printAllArticles(cv);
+                setAdapter(cv);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

@@ -1,12 +1,9 @@
 package com.example.comp3717_assignment1;
-
 import android.content.Context;
 import android.content.Intent;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,12 +14,12 @@ public class ArticleArray{
 
     public static final ArrayList<Articles> articles = new ArrayList<Articles>();
 
-    public static void loadNewArticles(String userQuery, RequestQueue requestQueue, Context cont) {
+    public static void loadArticles(String userQuery, RequestQueue requestQueue, Context cont) {
 
-        String url_req = "https://newsapi.org/v2/everything?q=" + userQuery +
-                 "&from=2020-02-14&sortBy=publishedAt&apiKey=7706477163614421b4c5d5b6b9dcf354";
+        String URL = "https://newsapi.org/v2/everything?q=" + userQuery
+                + "&from=" + MainActivity.formattedDate + "&sortBy=publishedAt&apiKey=" + MainActivity.API;
         articles.clear();
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url_req, new JSONObject(), (res) -> {
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, URL, new JSONObject(), (res) -> {
 
             JSONArray jsonArr = new JSONArray();
             try {
@@ -30,6 +27,7 @@ public class ArticleArray{
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+
             try {
                 for (int i = 0; i < 20; i++) {
                     System.out.println(jsonArr.getJSONObject(i));

@@ -8,11 +8,10 @@ Name: Setareh Shir-Koobi
 Student ID: A00945793
 Email: setarehshirkoobi@gmail.com
 
-Anything uncompleted:
+Anything uncompleted: None
 
-Major Challenges:
+Major Challenges: Adding an arrayadapter to a listview
 
-Special Instructions:
-
+Special Instructions: None
 
 API KEY: 7706477163614421b4c5d5b6b9dcf354

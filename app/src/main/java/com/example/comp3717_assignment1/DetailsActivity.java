@@ -1,7 +1,5 @@
 package com.example.comp3717_assignment1;
-
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -9,7 +7,6 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 public class DetailsActivity extends AppCompatActivity {
-
     TextView article_source;
     TextView article_author;
     TextView article_title;
@@ -18,7 +15,6 @@ public class DetailsActivity extends AppCompatActivity {
     ImageView img;
     TextView article_publish_time;
     TextView article_content;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +30,7 @@ public class DetailsActivity extends AppCompatActivity {
         article_author.setText("Author: " + ArticleArray.articles.get(i).getAuthor());
 
         article_title = findViewById(R.id.article_title);
-        article_title.setText("Title: " + ArticleArray.articles.get(i).title());
+        article_title.setText("Title: " + ArticleArray.articles.get(i).getTitle());
 
         article_description = findViewById(R.id.article_description);
         article_description.setText("Description: " + ArticleArray.articles.get(i).getDescription());
@@ -50,7 +46,7 @@ public class DetailsActivity extends AppCompatActivity {
                 .into(img);
 
         article_publish_time = findViewById(R.id.article_publish);
-        article_publish_time.setText("Publish time: " + ArticleArray.articles.get(i).getPublishedAt());
+        article_publish_time.setText("Published at: " + ArticleArray.articles.get(i).getPublishedAt());
 
         article_content = findViewById(R.id.article_content);
         article_content.setText("Content: " + ArticleArray.articles.get(i).getContent());
