@@ -28,61 +28,60 @@
                 android:id="@+id/article_author"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="60dp"
+                android:layout_marginStart="250dp"
                 android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="30dp"
+
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                 />
 
             <TextView
                 android:id="@+id/article_publish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/article_description"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.178" />
+                android:layout_marginStart="250dp"
+                android:layout_marginTop="60dp"
 
-            <TextView
-                android:id="@+id/article_description"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="68dp"
-                android:layout_marginTop="52dp"
-                android:text="TextView"
-                app:layout_constraintStart_toStartOf="parent" />
 
-            <TextView
-                android:id="@+id/article_URL"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="68dp"
-                android:layout_marginTop="56dp"
-                android:text="TextView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+
+                />
+
+            <TextView
+                android:id="@+id/article_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="250dp"
+                android:layout_marginTop="90dp"
+                android:text="TextView"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
 
             <TextView
                 android:id="@+id/article_content"
-                android:layout_width="212dp"
+                android:layout_width="330dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="68dp"
-                android:layout_marginTop="52dp"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="350dp"
+                android:layout_marginLeft="40dp"
                 android:text="TextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/article_author" />
 
-
             <ImageView
                 android:id="@+id/img"
-                android:layout_width="260dp"
-                android:layout_height="wrap_content"
+                android:layout_width="220dp"
+                android:layout_height="150dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="78dp"
-                android:layout_marginTop="1dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.469"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,19 +94,29 @@
                 android:layout_below="@+id/img"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginStart="179dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="90dp"
                 android:layout_marginEnd="174dp"
                 android:text="TextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/article_source"
+                android:id="@+id/article_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="144dp"
-                android:layout_marginTop="224dp"
+                android:gravity="left"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="590dp"
+                android:text="TextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/article_URL"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="250dp"
+                android:layout_marginTop="156dp"
                 android:text="TextView"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
