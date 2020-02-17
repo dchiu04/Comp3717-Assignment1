@@ -30,7 +30,6 @@ public class ArticleArray{
 
             try {
                 for (int i = 0; i < 20; i++) {
-                    System.out.println(jsonArr.getJSONObject(i));
                     String source = jsonArr.getJSONObject(i).getJSONObject("source").getString("name"); // gets sources
                     String author = jsonArr.getJSONObject(i).getString("author"); // gets authors
                     String title = jsonArr.getJSONObject(i).getString("title"); // gets title
